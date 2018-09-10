@@ -6,19 +6,24 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      animation: new Animated.Value(0),
+      animation: new Animated.Value(1),
     }
   }
 
   startAnimation = () => {
     Animated.timing(this.state.animation, {
-      toValue: -250,
+      toValue: 2,
       duration: 1500
     }).start(() => {
       Animated.timing(this.state.animation, {
         toValue: 0,
-        duration: 500,
-      }).start();
+        duration: 1500,
+      }).start(() => {
+        Animated.timing(this.state.animation, {
+          toValue: 1,
+          duration: 1500,
+        }).start();
+      })
     });
   }
 
@@ -29,17 +34,21 @@ export default class App extends React.Component {
       // opacity: this.state.animation
       transform: [
         {
-          translateY: this.state.animation,
-
+          // translateY: this.state.animation,
+          scale: this.state.animation,
+          // scaleX: this.state.animation,
         }
       ]
     }
     
     return (
       <View style={styles.container}>
+      <Text>Teste</Text>
         <TouchableWithoutFeedback onPress={this.startAnimation}>
 
-        <Animated.View style={[styles.box, animatedStyles]} />
+        <Animated.View style={[styles.box, animatedStyles]} >
+        <Text>Vai ficar tudo bem</Text>
+        </Animated.View>
 
         </TouchableWithoutFeedback>
       </View>
