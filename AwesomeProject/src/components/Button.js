@@ -12,13 +12,14 @@ export default class Button extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            textBtn: this.props,
-            animation: new Animated.Value(0),
-            opacity: new Animated.Value(1),
+          textBtn: this.props,
+          animation: new Animated.Value(0),
+          opacity: new Animated.Value(1),
+          onPress: this.props,
         }
     }
 
-  handlePress = () => {
+  handlePress() {
     this.state.animation.setValue(0);
     this.state.opacity.setValue(1);
 
@@ -34,8 +35,9 @@ export default class Button extends Component {
       }
     });
   };
+
   render() {
-    const { textBtn } = this.props;
+    const { textBtn, onPress} = this.props;
     const progressInterpolate = this.state.animation.interpolate({
       inputRange: [0, 1],
       outputRange: ["0%", "100%"],
@@ -65,7 +67,9 @@ export default class Button extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={this.handlePress}>
+        <TouchableWithoutFeedback 
+          onPress={onPress}
+        >
           <View style={styles.button}>
             <View style={StyleSheet.absoluteFill}>
               <Animated.View style={[styles.progress, progressStyle, styles.opacityBackground]} />

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import Button from './src/components/Button';
+import { createStackNavigator } from 'react-navigation';
 
-import styles from './src/styles/styles';
+// Screen
+import Home from './src/screen/Home';
+import Sliders from './src/screen/Slider';
 
-export default class componentName extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,12 +13,13 @@ export default class componentName extends Component {
   }
 
   render() {
-    const { container } = styles;
     return (
-      <View style={container}>
-      <Text>Teste button</Text>
-        <Button textBtn="Entrar"/>
-      </View>
+      <RootStack/>
     );
   }
 }
+
+const RootStack = createStackNavigator({
+  Sliders,
+  Home,
+});
